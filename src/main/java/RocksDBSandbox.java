@@ -22,7 +22,7 @@ public class RocksDBSandbox {
 
     public static Map<String, String> getAll(String dbPath) {
         Map<String, String> entries = new HashMap<>();
-        try (final RocksDB db = RocksDB.open(dbPath)) {
+        try (final RocksDB db = RocksDB.openReadOnly(dbPath)) {
             RocksIterator iterator = db.newIterator();
             for (iterator.seekToFirst(); iterator.isValid(); iterator.next()) {
                 entries.put(new String(iterator.key()), new String(iterator.value()));
